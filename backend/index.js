@@ -1,11 +1,13 @@
 const express = require('express');
 const validateToken = require('./validateToken');
+const cors = require('cors');
 
 const loginRoute = require('./loginRoutes');
 const peopleRoute = require('./peopleRoute');
 
 const app = express();
 app.use(express.json());
+app.use(cors())
 app.listen(3005, () => console.log('Open on door 3005'));
 
 app.use('/user', loginRoute);

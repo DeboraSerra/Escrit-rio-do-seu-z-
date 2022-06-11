@@ -5,7 +5,7 @@ const validateUser = (req, res, next) => {
   if (!password) return res.status(400).json({ message: 'password is required' });
   const isValidEmail = email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g);
   if (!isValidEmail) return res.status(400).json({ message: 'invalid email' });
-  const isValidPass = password.length >= 6 && password.includes(/\w+\W+/g);
+  const isValidPass = password.length >= 6 && password.match(/\w+\W+/g);
   if (!isValidPass) return res.status(400).json({ message: 'invalid password' });
   next();
 };

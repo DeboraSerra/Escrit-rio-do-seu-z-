@@ -10,7 +10,7 @@ peopleRoute.get(
   '/',
   rescue(async (_req, res) => {
     const people = await readPeople();
-    res.status(200).json(JSON.stringify(people));
+    res.status(200).json(people);
 }));
 
 peopleRoute.get('/search', rescue(async (req, res) => {

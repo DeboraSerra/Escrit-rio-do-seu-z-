@@ -6,14 +6,15 @@ const validateUser = require('./validateUser');
 
 const loginRoute = Router();
 
-loginRoute.post('/login', rescue(async (req, res) => {
-  const { email, password } = req.body;
+loginRoute.get('/login', rescue(async (req, res) => {
+  const { email, password } = req.query;
   const users = await readUser();
   const user = users.find((u) => u.email === email);
+  console.log(email);
   if (!user || user.password !== password) {
     return res.status(403).json({ message: 'wrong email or password' });
   }
-  res.status(200).json({ token: token() });
+  res.status(200).json({ token: token(), user: user.name });
 }));
 
 loginRoute.post(
