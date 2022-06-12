@@ -63,13 +63,14 @@ peopleRoute.put(
     const newPerson = {
       first_name: firstName,
       last_name: lastName,
-      birthday,
+      birthday: birthday.split('-').reverse().join('-'),
       city,
       email,
       phone,
       state,
       address,
     }
+    console.log(newPerson);
     await updatePerson(newPerson, id);
     res.status(202).end();
   })
@@ -79,6 +80,7 @@ peopleRoute.delete('/:id', rescue(async (req, res) => {
   const { id } = req.params;
   const people = await readPeople();
   const inactive = JSON.parse(await fs.readFile('./inactivePeople.json', 'utf-8'));
+  console.log(inactive);
   const index = people.findIndex((p) => p.id === id);
   if (index === -1) return res.status(404).json({ message: 'Person not found' });
   inactive.push(people[index]);

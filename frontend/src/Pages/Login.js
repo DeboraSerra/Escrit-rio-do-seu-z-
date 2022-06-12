@@ -7,7 +7,10 @@ const Login = () => {
     email: '',
     password: '',
     disabled: true,
+    error: false,
+    message: '',
   })
+  const { email, password, disabled, error, message } = state;
 
   const { setUser } = useContext(MyContext);
   const history = useHistory();
@@ -20,11 +23,11 @@ const Login = () => {
   }
   useEffect(() => {
     validateFields();
-  }, [state.name, state.email, state.password]);
+  }, [email, password]);
 
   const validateFields = () => {
-    const isValidEmail = state.email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g);
-    const isValidPass = state.password.match(/\w+/g);
+    const isValidEmail = email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g);
+    const isValidPass = password.match(/\w+/g);
     if (isValidEmail && isValidPass) {
       setState({
         ...state,
@@ -33,10 +36,17 @@ const Login = () => {
     }
   }
 
-  const handleClick = (e) => {
+  const handleClick = async (e) => {
     e.preventDefault();
-    const { email, password } = state;
-    setUser({ email, password });
+    const response = await setUser({ email, password });
+    if (response.message) {
+      setState({
+        ...state,
+        error: true,
+        message: response.message,
+      });
+      return;
+    }
     history.push('/dashboard');
   }
 
@@ -47,7 +57,7 @@ const Login = () => {
         name="email"
         placeholder="E-mail"
         aria-label="Type your email"
-        value={ state.email }
+        value={ email }
         onChange={ handleChange }
       />
       <input
@@ -55,17 +65,18 @@ const Login = () => {
         name="password"
         placeholder="Password"
         aria-label="Type your password"
-        value={ state.password }
+        value={ password }
         onChange={ handleChange }
       />
       <button
         type="submit"
         onClick={ handleClick }
-        disabled={ state.disabled }
+        disabled={ disabled }
       >
         Log in
       </button>
       <Link to="/register">Register</Link>
+      {error && <p>{message}</p>}
     </form>
   )
 }

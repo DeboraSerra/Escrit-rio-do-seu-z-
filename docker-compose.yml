@@ -1,0 +1,14 @@
+version: '3'
+services:
+  front:
+    build: ./frontend
+    container_name: office_front
+    ports:
+      - "3000:80"
+    depends_on:
+      - back
+  back:
+    build: ./backend
+    container_name: office_back
+    ports:
+      - "3005:3005"
