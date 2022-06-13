@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provides';
+import style from '../styles/Register.module.css';
 
 const Register = () => {
   const [state, setState] = useState({
@@ -9,7 +10,10 @@ const Register = () => {
     password: '',
     sec_pass: '',
     disabled: true,
+    error: false,
+    message: '',
   });
+  const { error, message } = state;
   const { registerUser } = useContext(MyContext);
   const history = useHistory();
 
@@ -35,15 +39,24 @@ const Register = () => {
       })
     }
   }
-  const handleSubmit = () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const { name, email, password } = state;
-    console.log({email});
-    registerUser({ name, email, password });
+    const data = await registerUser({ name, email, password });
+    if (data.message === 'User already exists') {
+      setState({
+        ...state,
+        error: true,
+        message: data.message,
+      });
+      return;
+    }
     history.push('/');
   }
   return (
-    <form onSubmit={ handleSubmit }>
+    <form onSubmit={ handleSubmit } className={ style.form }>
       <input
+        className={ style.input }
         type="text"
         name="name"
         value={ state.name }
@@ -53,6 +66,7 @@ const Register = () => {
       />
       <input
         type="text"
+        className={ style.input }
         name="email"
         value={ state.email }
         placeholder="E-mail"
@@ -60,15 +74,17 @@ const Register = () => {
         onChange={ handleChange }
       />
       <input
-        type="text"
+        type="password"
         name="password"
+        className={ style.input }
         value={ state.password }
         placeholder="Password"
         aria-label="Type your password"
         onChange={ handleChange }
       />
       <input
-        type="text"
+        type="password"
+        className={ style.input }
         name="sec_pass"
         value={ state.sec_pass }
         placeholder="Confirm password"
@@ -77,11 +93,13 @@ const Register = () => {
       />
       <button
         type="submit"
+        className={ style.submitBtn }
         onClick={ handleSubmit }
         disabled={ state.disabled }
       >
         Send
       </button>
+      {error && <p className={ style.message }>{message}</p>}
     </form>
   )
 }

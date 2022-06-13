@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { MyContext } from '../context/Provides';
+import style from '../styles/Login.module.css';
 
 const Login = () => {
   const [state, setState] = useState({
@@ -51,8 +52,9 @@ const Login = () => {
   }
 
   return (
-    <form onSubmit={ handleClick }>
+    <form onSubmit={ handleClick } className={ style.form }>
       <input
+        className={ style.input }
         type="email"
         name="email"
         placeholder="E-mail"
@@ -61,6 +63,7 @@ const Login = () => {
         onChange={ handleChange }
       />
       <input
+        className={ style.input }
         type="password"
         name="password"
         placeholder="Password"
@@ -69,14 +72,15 @@ const Login = () => {
         onChange={ handleChange }
       />
       <button
+        className={ style.submitBtn }
         type="submit"
         onClick={ handleClick }
         disabled={ disabled }
       >
         Log in
       </button>
-      <Link to="/register">Register</Link>
-      {error && <p>{message}</p>}
+      <Link className={ style.link } to="/register">Register</Link>
+      {error && <p className={ style.message }>{message}</p>}
     </form>
   )
 }

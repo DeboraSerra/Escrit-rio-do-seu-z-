@@ -52,7 +52,9 @@ const Provider = ({ children }) => {
       },
       body: JSON.stringify(user),
     }
-    await fetch(url, obj);
+    const response = await fetch(url, obj);
+    const data = await response.json();
+    return data;
   }
 
   const getPeople = async () => {

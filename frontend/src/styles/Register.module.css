@@ -1,0 +1,37 @@
+.form {
+  background-color: var(--ocean-blueish);
+  width: 80%;
+  max-width: 500px;
+  height: 70vh;
+  max-height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.input {
+  width: 70%;
+  padding: 12px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  background-color: var(--light-gray);
+  border: none;
+}
+
+.submitBtn {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--light-gray);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.message {
+  position: absolute;
+  background-color: var(--old-pink);
+  color: var(--light-gray);
+  bottom: 0;
+  right: 0;
+}

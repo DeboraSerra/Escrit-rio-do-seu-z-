@@ -5,6 +5,7 @@ import Dashboard from './Pages/Dashboard';
 import Register from './Pages/Register';
 import PersonPage from './Pages/PersonPage';
 import UpdatePage from './Pages/UpdatePersonData';
+import './App.css';
 
 function App() {
   return (

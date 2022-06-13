@@ -1,0 +1,43 @@
+.form {
+  background-color: var(--ocean-blueish);
+  box-shadow: 0 0 10px var(--gray1);
+  width: 80%;
+  max-width: 500px;
+  height: 70vh;
+  max-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+.input {
+  width: 70%;
+  padding: 12px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  background-color: var(--light-gray);
+  border: none;
+}
+
+.submitBtn {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--light-gray);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.link {
+  background-color: var(--light-gray);
+  padding: 8px;
+  text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
+  border-radius: 8px;
+}
+
+.link:hover {
+  opacity: 0.9;
+}
