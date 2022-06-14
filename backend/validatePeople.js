@@ -1,5 +1,6 @@
 const validateName = (req, res, next) => {
   const { firstName, lastName } = req.body;
+  console.log({ firstName, lastName });
   if (!firstName || !lastName) return res.status(400).json({ message: 'Invalid name' });
   next();
 }

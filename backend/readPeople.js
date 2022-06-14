@@ -19,16 +19,16 @@ const addPeople = async (person) => {
   const people = await readPeople();
   people.push({ ...person, id: generateId() });
   await fs.writeFile('./pessoas.json', JSON.stringify(people));
+  return people;
 };
 
 const updatePerson = async (person, id) => {
   const people = await readPeople();
   const index = people.findIndex((p) => p.id === id);
-  if (index === -1) {
-    throw new Error('Person not found');
-  }
+  if (index === -1) throw new Error('Person not found');
   people[index] = { ...people[index], ...person };
   await fs.writeFile('./pessoas.json', JSON.stringify(people));
+  return people;
 }
 
 module.exports = { readPeople, addPeople, updatePerson };

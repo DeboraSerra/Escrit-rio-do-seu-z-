@@ -39,7 +39,7 @@ peopleRoute.post(
     const newPerson = {
       first_name: firstName,
       last_name: lastName,
-      birthday,
+      birthday: birthday.split('-').reverse().join('-'),
       city,
       email,
       phone,
