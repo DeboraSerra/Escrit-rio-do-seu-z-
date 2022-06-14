@@ -40,6 +40,10 @@ describe('addUser', () => {
     sinon.stub(fs, 'readFile')
       .returns(JSON.stringify(mockUsers))
     sinon.stub(fs, 'writeFile');
-    expect(async () => await addUser(newUser)).to.throw();
+    try {
+      const response = await addUser(newUser);
+    } catch (err) {
+      expect(err.message).to.be.equal('User already exists');
+    }
   });
 });
