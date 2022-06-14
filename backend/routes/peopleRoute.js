@@ -1,8 +1,8 @@
 const { Router } = require('express');
 const rescue = require('express-rescue');
 const fs = require('fs/promises');
-const { readPeople, addPeople, updatePerson } = require('./readPeople');
-const { validateBirthday, validateEmail, validateName } = require('./validatePeople');
+const { readPeople, addPeople, updatePerson } = require('../services/readPeople');
+const { validateBirthday, validateEmail, validateName } = require('../validations/validatePeople');
 
 const peopleRoute = Router();
 

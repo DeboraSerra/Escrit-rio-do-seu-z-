@@ -1,9 +1,9 @@
 const express = require('express');
-const validateToken = require('./validateToken');
+const validateToken = require('./validations/validateToken');
 const cors = require('cors');
 
-const loginRoute = require('./loginRoutes');
-const peopleRoute = require('./peopleRoute');
+const loginRoute = require('./routes/loginRoutes');
+const peopleRoute = require('./routes/peopleRoute');
 
 const app = express();
 app.use(express.json());
