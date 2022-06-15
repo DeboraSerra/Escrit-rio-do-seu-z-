@@ -5,7 +5,6 @@ import mockFetch from './mocks/mockFetch';
 import userEvent from '@testing-library/user-event';
 import mockUsers from './mocks/mockUsers';
 import { act } from 'react-dom/test-utils';
-import token from '../../../backend/services/generateToken';
 import mockPeople from './mocks/mockPeople';
 
 const user = mockUsers[0];

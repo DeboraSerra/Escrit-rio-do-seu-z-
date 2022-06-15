@@ -55,7 +55,7 @@ describe('Login Page', () => {
     await act(async () => { userEvent.click(btn); });
     const { pathname } = history.location;
     expect(pathname).toBe('/dashboard');
-    expect(await screen.findByText(/Hello/g)).toBeInTheDocument();
+    expect(await screen.findByText(/Hello/)).toBeInTheDocument();
   });
   it('should redirect the page when clicking the register button', async () => {
     const { history } = renderWithRouter(<App />);

@@ -147,18 +147,23 @@ const Provider = ({ children }) => {
   }
 
   const addPerson = async (person) => {
-    const storageToken = localStorage.getItem('token');
-    const url = 'http://localhost:3005/people';
-    const obj = {
-      method: 'POST',
-      headers: {
-        Authorization: token || storageToken,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(person),
+    try {
+      const storageToken = localStorage.getItem('token');
+      const url = 'http://localhost:3005/people';
+      const obj = {
+        method: 'POST',
+        headers: {
+          Authorization: token || storageToken,
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(person),
+      }
+      await fetch(url, obj);
+    } catch (err) {
+      console.log(err.message);
+      return err;
     }
-    await fetch(url, obj);
   }
 
   useEffect(() => {

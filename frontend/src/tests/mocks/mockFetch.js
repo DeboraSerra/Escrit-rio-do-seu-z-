@@ -26,6 +26,9 @@ const mockFetch = (url, obj) => {
       if (url === 'http://localhost:3005/user/register' && !mockUsers.some((u) => u.email === JSON.parse(obj.body).email)) {
         return Promise.resolve({ message: 'User created' });
       }
+      if (url === 'http://localhost:3005/people' && obj.method === 'POST') {
+        return Promise.resolve(mockPeople.push(JSON.parse(obj.body)));
+      }
       if (url === 'http://localhost:3005/people') {
         return Promise.resolve(mockPeople);
       }

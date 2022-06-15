@@ -55,7 +55,15 @@ const AddPerson = () => {
         st,
         address,
       }
-      await addPerson(person)
+      const response = await addPerson(person)
+      if (response && response.message) {
+        setState({
+          ...state,
+          error: true,
+          message: response.message,
+        });
+        return;
+      }
       history.push(`/dashboard`)
     }
   }
