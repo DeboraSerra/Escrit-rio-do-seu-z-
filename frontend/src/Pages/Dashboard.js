@@ -39,7 +39,7 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    setRenderPeople(query);
+    setRenderPeople(query.toLowerCase());
   }, [query])
 
   return (
@@ -61,6 +61,7 @@ const Dashboard = () => {
           <section>
             {renderPeople?.map((person) => (
               <button
+                data-testid="people-btn"
                 type="button"
                 key={ person.id }
                 id={ person.id }

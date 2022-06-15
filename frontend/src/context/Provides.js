@@ -88,7 +88,7 @@ const Provider = ({ children }) => {
   }
 
   const setRenderPeople = (text) => {
-    const newSet = people.filter((p) => p.first_name.includes(text));
+    const newSet = people.filter((p) => p.first_name.toLowerCase().includes(text));
     setState({
       ...state,
       renderPeople: newSet,

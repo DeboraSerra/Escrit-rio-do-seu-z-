@@ -64,6 +64,7 @@ const AddPerson = () => {
       <p>{message}</p>
     ) : (
       <form onSubmit={ handleSubmit }>
+        <legend>Add someone to the list!</legend>
         <input
           type="text"
           name="firstName"
