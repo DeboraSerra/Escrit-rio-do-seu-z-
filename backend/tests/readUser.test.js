@@ -1,4 +1,4 @@
-const { readUser, addUser } = require('../readUser');
+const { readUser, addUser } = require('../services/readUser');
 const fs = require('fs/promises');
 const sinon = require('sinon');
 const { afterEach } = require('mocha');

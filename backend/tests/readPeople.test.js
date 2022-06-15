@@ -1,4 +1,4 @@
-const { readPeople, addPeople, updatePerson } = require('../readPeople');
+const { readPeople, addPeople, updatePerson } = require('../services/readPeople');
 const fs = require('fs/promises');
 const sinon = require('sinon');
 const mockPeople = require('./mockPeople');
