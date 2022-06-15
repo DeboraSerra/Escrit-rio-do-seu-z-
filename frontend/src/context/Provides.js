@@ -27,52 +27,64 @@ const Provider = ({ children }) => {
   }, [])
 
   const setUser = async (user) => {
-    const url = `http://localhost:3005/user/login?email=${user.email}&password=${user.password}`;
-    const response = await fetch(url);
-    const data = await response.json();
-    if (data.message) return data;
-    setState({
-      ...state,
-      user: data.user,
-      token: data.token,
-    });
-    localStorage.setItem('logged', true);
-    localStorage.setItem('user', data.user);
-    localStorage.setItem('token', data.token);
-    return data;
+    try {
+      const url = `http://localhost:3005/user/login?email=${user.email}&password=${user.password}`;
+      const response = await fetch(url);
+      const data = await response.json();
+      if (data.message) return data;
+      setState({
+        ...state,
+        user: data.user,
+        token: data.token,
+      });
+      localStorage.setItem('logged', true);
+      localStorage.setItem('user', data.user);
+      localStorage.setItem('token', data.token);
+      return data;
+    } catch (err) {
+      return err;
+    }
   }
 
   const registerUser = async (user) => {
-    const url = 'http://localhost:3005/user/register';
-    const obj = {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
+    try {
+      const url = 'http://localhost:3005/user/register';
+      const obj = {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      }
+      const response = await fetch(url, obj);
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      return err;
     }
-    const response = await fetch(url, obj);
-    const data = await response.json();
-    return data;
   }
 
   const getPeople = async () => {
-    const storageToken = localStorage.getItem('token');
-    const url = 'http://localhost:3005/people';
-    const obj = {
-      method: 'GET',
-      headers: {
-        Authorization: token || storageToken,
-      },
+    try {
+      const storageToken = localStorage.getItem('token');
+      const url = 'http://localhost:3005/people';
+      const obj = {
+        method: 'GET',
+        headers: {
+          Authorization: token || storageToken,
+        },
+      }
+      const response = await fetch(url, obj);
+      const people = await response.json();
+      setState({
+        ...state,
+        people,
+        renderPeople: people,
+      })
+    } catch (err) {
+      return err;
     }
-    const response = await fetch(url, obj);
-    const people = await response.json();
-    setState({
-      ...state,
-      people,
-      renderPeople: people,
-    })
   }
 
   const setRenderPeople = (text) => {
@@ -84,20 +96,24 @@ const Provider = ({ children }) => {
   }
 
   const getPersonData = async (id) => {
-    const storageToken = localStorage.getItem('token');
-    const url = `http://localhost:3005/people/${id}`;
-    const obj = {
-      method: 'GET',
-      headers: {
-        Authorization: token || storageToken,
-      },
+    try {
+      const storageToken = localStorage.getItem('token');
+      const url = `http://localhost:3005/people/${id}`;
+      const obj = {
+        method: 'GET',
+        headers: {
+          Authorization: token || storageToken,
+        },
+      }
+      const response = await fetch(url, obj);
+      const data = await response.json();
+      setState({
+        ...state,
+        person: data,
+      })
+    } catch (err) {
+      return err;
     }
-    const response = await fetch(url, obj);
-    const data = await response.json();
-    setState({
-      ...state,
-      person: data,
-    })
   }
 
   const updatePerson = async (id, data) => {
@@ -126,6 +142,21 @@ const Provider = ({ children }) => {
       headers: {
         Authorization: token || storageToken,
       },
+    }
+    await fetch(url, obj);
+  }
+
+  const addPerson = async (person) => {
+    const storageToken = localStorage.getItem('token');
+    const url = 'http://localhost:3005/people';
+    const obj = {
+      method: 'POST',
+      headers: {
+        Authorization: token || storageToken,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(person),
     }
     await fetch(url, obj);
   }
@@ -159,6 +190,7 @@ const Provider = ({ children }) => {
     person,
     updatePerson,
     deletePerson,
+    addPerson,
   }
 
   return (

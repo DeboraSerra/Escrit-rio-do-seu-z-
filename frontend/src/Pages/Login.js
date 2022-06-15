@@ -34,21 +34,28 @@ const Login = () => {
         ...state,
         disabled: false,
       })
+    } else {
+      setState({
+        ...state,
+        disabled: true,
+      })
     }
   }
 
   const handleClick = async (e) => {
     e.preventDefault();
-    const response = await setUser({ email, password });
-    if (response.message) {
-      setState({
-        ...state,
-        error: true,
-        message: response.message,
-      });
-      return;
+    if (!disabled) {
+      const response = await setUser({ email, password });
+      if (response.message) {
+        setState({
+          ...state,
+          error: true,
+          message: response.message,
+        });
+        return;
+      }
+      history.push('/dashboard');
     }
-    history.push('/dashboard');
   }
 
   return (
@@ -61,6 +68,7 @@ const Login = () => {
         aria-label="Type your email"
         value={ email }
         onChange={ handleChange }
+        data-testid="email-input"
       />
       <input
         className={ style.input }
@@ -70,6 +78,7 @@ const Login = () => {
         aria-label="Type your password"
         value={ password }
         onChange={ handleChange }
+        data-testid="pass-input"
       />
       <button
         className={ style.submitBtn }
@@ -80,7 +89,7 @@ const Login = () => {
         Log in
       </button>
       <Link className={ style.link } to="/register">Register</Link>
-      {error && <p className={ style.message }>{message}</p>}
+      {error && <p data-testid="error-message" className={ style.message }>{message}</p>}
     </form>
   )
 }
