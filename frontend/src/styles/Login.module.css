@@ -41,3 +41,11 @@
 .link:hover {
   opacity: 0.9;
 }
+
+.message {
+  position: absolute;
+  background-color: var(--old-pink);
+  color: var(--light-gray);
+  top: 0;
+  left: 0;
+}

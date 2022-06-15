@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { FaEye } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provides';
 import style from '../styles/Register.module.css';
@@ -43,7 +44,7 @@ const Register = () => {
     e.preventDefault();
     const { name, email, password } = state;
     const data = await registerUser({ name, email, password });
-    if (data.message === 'User already exists') {
+    if (data.message !== 'User created') {
       setState({
         ...state,
         error: true,
@@ -53,8 +54,19 @@ const Register = () => {
     }
     history.push('/');
   }
+
+  const showPass = (e) => {
+    const input = e.target.previousSibling
+    if (input.type === 'password') {
+      input.type = 'text';
+    } else {
+      input.type = 'password';
+    }
+  }
+
   return (
     <form onSubmit={ handleSubmit } className={ style.form }>
+      <legend>Register</legend>
       <input
         className={ style.input }
         type="text"
@@ -73,24 +85,30 @@ const Register = () => {
         aria-label="Type your email"
         onChange={ handleChange }
       />
-      <input
-        type="password"
-        name="password"
-        className={ style.input }
-        value={ state.password }
-        placeholder="Password"
-        aria-label="Type your password"
-        onChange={ handleChange }
-      />
-      <input
-        type="password"
-        className={ style.input }
-        name="sec_pass"
-        value={ state.sec_pass }
-        placeholder="Confirm password"
-        aria-label="Type your password again"
-        onChange={ handleChange }
-      />
+      <label htmlFor="">
+        <input
+          type="password"
+          name="password"
+          className={ style.input }
+          value={ state.password }
+          placeholder="Password"
+          aria-label="Type your password"
+          onChange={ handleChange }
+        />
+        <FaEye onClick={ showPass } />
+      </label>
+      <label htmlFor="">
+        <input
+          type="password"
+          className={ style.input }
+          name="sec_pass"
+          value={ state.sec_pass }
+          placeholder="Confirm password"
+          aria-label="Type your password again"
+          onChange={ handleChange }
+        />
+        <FaEye onClick={ showPass } />
+      </label>
       <button
         type="submit"
         className={ style.submitBtn }
@@ -99,7 +117,7 @@ const Register = () => {
       >
         Send
       </button>
-      {error && <p className={ style.message }>{message}</p>}
+      {error && <p data-testid="error-message" className={ style.message }>{message}</p>}
     </form>
   )
 }

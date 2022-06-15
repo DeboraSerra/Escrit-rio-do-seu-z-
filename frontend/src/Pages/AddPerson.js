@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { MyContext } from '../context/Provides';
 
-const UpdatePage = () => {
+const AddPerson = () => {
   const [state, setState] = useState({
     firstName: '',
     lastName: '',
@@ -19,8 +19,7 @@ const UpdatePage = () => {
   });
   const { firstName, lastName, birthday, city, email, phone,
     state: st, address, disabled, sent, error, message } = state;
-  const { updatePerson } = useContext(MyContext);
-  const { id } = useParams();
+  const { addPerson } = useContext(MyContext);
   const history = useHistory();
 
   const handleChange = ({ target }) => {
@@ -35,7 +34,6 @@ const UpdatePage = () => {
     const isValidName = firstName && lastName;
     const isValidEmail = email && email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g);
     const isValidBirthday = birthday && birthday.match(/^\d{4}-\d{2}-\d{2}/g);
-    console.log({ isValidName, isValidEmail, isValidBirthday });
     if (isValidBirthday && isValidName && isValidEmail) {
       setState({
         ...state,
@@ -57,11 +55,8 @@ const UpdatePage = () => {
         st,
         address,
       }
-      const response = await updatePerson(id, person);
-      console.log(response);
-      if (!response) {
-        history.push(`/${id}`)
-      }
+      await addPerson(person)
+      history.push(`/dashboard`)
     }
   }
   return (
@@ -127,10 +122,10 @@ const UpdatePage = () => {
           onChange={ handleChange }
         />
         {error && <p>{message}</p>}
-        <button type="submit" disabled={ disabled } onClick={ handleSubmit }>Update person</button>
+        <button type="submit" disabled={ disabled } onClick={ handleSubmit }>Add person</button>
       </form>
     )
   )
 }
 
-export default UpdatePage;
+export default AddPerson;

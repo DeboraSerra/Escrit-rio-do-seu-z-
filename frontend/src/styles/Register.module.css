@@ -32,6 +32,6 @@
   position: absolute;
   background-color: var(--old-pink);
   color: var(--light-gray);
-  bottom: 0;
-  right: 0;
+  top: 0;
+  left: 0;
 }

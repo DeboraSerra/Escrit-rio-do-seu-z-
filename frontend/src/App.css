@@ -49,3 +49,9 @@ button:active {
   background-color: var(--old-pink);
   color: var(--light-gray);
 }
+
+button:disabled {
+  cursor: not-allowed;
+  background-color: var(--blue);
+  color: var(--old-pink);
+}

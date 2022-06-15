@@ -9,7 +9,7 @@ const notAUser = {
   password: 'Hedwig01!',
 }
 
-const mockFetch = (url) => {
+const mockFetch = (url, obj) => {
   return Promise.resolve({
     json: () => {
       if (url === `http://localhost:3005/user/login?email=${user.email}&password=${user.password}`) {
@@ -17,6 +17,12 @@ const mockFetch = (url) => {
       }
       if (url === `http://localhost:3005/user/login?email=${notAUser.email}&password=${notAUser.password}`) {
         return Promise.resolve({ message: 'wrong email or password' });
+      }
+      if (url === 'http://localhost:3005/user/register' && mockUsers.some((u) => u.email === JSON.parse(obj.body).email)) {
+        return Promise.reject({ message: 'User already exists' });
+      }
+      if (url === 'http://localhost:3005/user/register' && !mockUsers.some((u) => u.email === JSON.parse(obj.body).email)) {
+        return Promise.resolve({ message: 'User created' });
       }
     }
   })

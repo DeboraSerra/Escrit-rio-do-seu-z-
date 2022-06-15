@@ -47,6 +47,7 @@ const Dashboard = () => {
       <h1>Hello! {user || storageUser}</h1>
       <p>Wanna see some people?</p>
       <button type="button" onClick={ handleClick }>Click here!</button>
+      <button type="button" onClick={ () => history.push('/add-person') }>Add a new person</button>
       {clicked && (
         <section>
           <input

@@ -53,7 +53,6 @@ describe('Login Page', () => {
     const btn = screen.getByRole('button');
     expect(btn).not.toBeDisabled();
     await act(async () => { userEvent.click(btn); });
-    console.log(history.location);
     const { pathname } = history.location;
     expect(pathname).toBe('/dashboard');
     expect(await screen.findByText(/Hello/g)).toBeInTheDocument();
