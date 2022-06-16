@@ -24,7 +24,7 @@ Esse projeto foi desenvolvido como projeto bônus no módulo de Backend no curso
       - [POST /people](#post-people)
       - [PUT /people/:id](#put-peopleid)
       - [DELETE /people/:id](#delete-peopleid)
-  - [Frontend](#frontend)
+    - [Frontend](#frontend)
       - [http://localhost:3000](#httplocalhost3000)
       - [http://localhost:3000/register](#httplocalhost3000register)
       - [http://localhost:3000/dashboard](#httplocalhost3000dashboard)
@@ -239,7 +239,7 @@ Essa rota é utilizada para deletar uma pessoa do 'banco de dados'. Ela espera r
 <br/>
 [Voltar ao topo](#sumário)
 
-## Frontend
+### Frontend
 #### http://localhost:3000
 Essa rota é utilizada para realização do login e consome a rota `GET /user/login` do backend. Caso a pessoa usuária esteja registrada e o email e senha estejam de acordo com o cadastrado, ela será redirecionada para o dashboard. Caso contrário ela recebe um aviso informando que o email ou senha está errado.
 <br/>
