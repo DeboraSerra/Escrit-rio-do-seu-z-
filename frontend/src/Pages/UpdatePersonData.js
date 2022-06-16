@@ -69,6 +69,7 @@ const UpdatePage = () => {
       <p>{message}</p>
     ) : (
       <form onSubmit={ handleSubmit }>
+        <legend>Update person's data</legend>
         <input
           type="text"
           name="firstName"
