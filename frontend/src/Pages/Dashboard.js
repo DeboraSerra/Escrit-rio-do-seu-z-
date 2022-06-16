@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PersonCard from '../Components/PersonCard';
 import { MyContext } from '../context/Provides';
+import style from '../styles/Dashboard.module.css';
 
 const Dashboard = () => {
   const [state, setState] = useState({
@@ -38,19 +39,27 @@ const Dashboard = () => {
     })
   }
 
+  const logOut = () => {
+    localStorage.clear();
+    history.push('/');
+  }
+
   useEffect(() => {
     setRenderPeople(query.toLowerCase());
   }, [query])
 
   return (
-    <main>
-      <h1>Hello! {user || storageUser}</h1>
-      <p>Wanna see some people?</p>
-      <button type="button" onClick={ handleClick }>Click here!</button>
-      <button type="button" onClick={ () => history.push('/add-person') }>Add a new person</button>
+    <main className={ style.main }>
+      <header className={ style.header }>
+        <h1>Hello! {user || storageUser}</h1>
+        <button className={ style.button } type="button" onClick={ handleClick }> Wanna see some people? Click here!</button>
+        <button className={ style.button } type="button" onClick={ () => history.push('/add-person') }>Add a new person</button>
+        <button className={ style.button } type="button" onClick={ logOut }>Log out</button>
+      </header>
       {clicked && (
-        <section>
+        <section className={ style.peopleSect }>
           <input
+            className={ style.input }
             type="text"
             name="query"
             placeholder="Find someone by name"
@@ -58,9 +67,10 @@ const Dashboard = () => {
             value={ query }
             onChange={ handleChange }
           />
-          <section>
+          <section className={ style.peopleBtns }>
             {renderPeople?.map((person) => (
               <button
+                className={ style.personBtn }
                 data-testid="people-btn"
                 type="button"
                 key={ person.id }

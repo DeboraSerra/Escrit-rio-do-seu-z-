@@ -60,7 +60,7 @@ const Login = () => {
 
   return (
     <form onSubmit={ handleClick } className={ style.form }>
-      <legend>Login</legend>
+      <legend className={ style.legend }>Login</legend>
       <input
         className={ style.input }
         type="email"

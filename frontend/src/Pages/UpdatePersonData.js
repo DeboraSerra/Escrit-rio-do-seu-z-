@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { MyContext } from '../context/Provides';
+import style from '../styles/AddPerson.module.css';
+import { FaHome } from 'react-icons/fa';
 
 const UpdatePage = () => {
   const [state, setState] = useState({
@@ -19,7 +21,7 @@ const UpdatePage = () => {
   });
   const { firstName, lastName, birthday, city, email, phone,
     state: st, address, disabled, sent, error, message } = state;
-  const { updatePerson } = useContext(MyContext);
+  const { updatePerson, person: p } = useContext(MyContext);
   const { id } = useParams();
   const history = useHistory();
 
@@ -52,10 +54,10 @@ const UpdatePage = () => {
         lastName,
         birthday,
         email,
-        city,
-        phone,
-        st,
-        address,
+        city: city || p.city,
+        phone: phone || p.phone,
+        st: st || p.state,
+        address: address || p.address,
       }
       const response = await updatePerson(id, person);
       console.log(response);
@@ -68,9 +70,11 @@ const UpdatePage = () => {
     sent && !error ? (
       <p>{message}</p>
     ) : (
-      <form onSubmit={ handleSubmit }>
-        <legend>Update person's data</legend>
+      <form className={ style.form } onSubmit={ handleSubmit }>
+        <FaHome className={ style.home } onClick={ () => history.push('/dashboard') } />
+        <legend className={ style.legend }>Update person's data</legend>
         <input
+          className={ style.input }
           type="text"
           name="firstName"
           value={ firstName }
@@ -79,6 +83,7 @@ const UpdatePage = () => {
         />
         <input
           type="text"
+          className={ style.input }
           name="lastName"
           placeholder="Last name"
           value={ lastName }
@@ -86,21 +91,26 @@ const UpdatePage = () => {
         />
         <input
           type="email"
+          className={ style.input }
           name="email"
           placeholder="E-mail"
           value={ email }
           onChange={ handleChange }
         />
-        <label htmlFor="birthday">Birthday</label>
-        <input
-          id="birthday"
-          type="date"
-          name="birthday"
-          value={ birthday }
-          onChange={ handleChange }
-        />
+        <label className={ style.label } htmlFor="birthday">Birthday
+          {' '}
+          <input
+            className={ style.input }
+            id="birthday"
+            type="date"
+            name="birthday"
+            value={ birthday }
+            onChange={ handleChange }
+          />
+        </label>
         <input
           type="text"
+          className={ style.input }
           placeholder="Phone"
           name="phone"
           value={ phone }
@@ -108,6 +118,7 @@ const UpdatePage = () => {
         />
         <input
           type="text"
+          className={ style.input }
           name="address"
           placeholder="Address"
           value={ address }
@@ -115,6 +126,7 @@ const UpdatePage = () => {
         />
         <input
           type="text"
+          className={ style.input }
           placeholder="City"
           name="city"
           value={ city }
@@ -122,13 +134,16 @@ const UpdatePage = () => {
         />
         <input
           type="text"
+          className={ style.input }
           placeholder="State"
           name="state"
           value={ st }
           onChange={ handleChange }
         />
-        {error && <p>{message}</p>}
-        <button type="submit" disabled={ disabled } onClick={ handleSubmit }>Update person</button>
+        {error && <p className={ style.message }>{message}</p>}
+        <button className={ style.button } type="submit" disabled={ disabled } onClick={ handleSubmit }>
+          Update person
+        </button>
       </form>
     )
   )

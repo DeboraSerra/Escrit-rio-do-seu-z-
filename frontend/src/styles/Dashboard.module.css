@@ -1,0 +1,64 @@
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.header {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--ocean-blueish);
+  padding: 2%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0 0 10px var(--blue);
+}
+
+.button {
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  background-color: var(--light-gray);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--blue);
+}
+
+.peopleSect {
+  margin-top: 100px;
+  width: 90%;
+  text-align: center;
+}
+
+.input {
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--blue);
+  margin: 16px;
+  font-size: 1.2rem;
+  width: 50%;
+  min-width: 300px;
+  text-align: center;
+}
+
+.peopleBtns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.personBtn {
+  margin: 8px;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 0 10px var(--blue);
+  padding: 8px;
+}

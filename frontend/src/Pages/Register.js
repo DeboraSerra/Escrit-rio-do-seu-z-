@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { FaEye } from 'react-icons/fa';
+import { FaEye, FaHome } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import { MyContext } from '../context/Provides';
 import style from '../styles/Register.module.css';
@@ -64,9 +64,14 @@ const Register = () => {
     }
   }
 
+  const goHome = () => {
+    history.push('/');
+  }
+
   return (
     <form onSubmit={ handleSubmit } className={ style.form }>
-      <legend>Register</legend>
+      <FaHome className={ style.home } onClick={ goHome } />
+      <legend className={ style.legend }>Register</legend>
       <input
         className={ style.input }
         type="text"
@@ -85,7 +90,7 @@ const Register = () => {
         aria-label="Type your email"
         onChange={ handleChange }
       />
-      <label htmlFor="">
+      <label className={ style.label }>
         <input
           type="password"
           name="password"
@@ -95,9 +100,9 @@ const Register = () => {
           aria-label="Type your password"
           onChange={ handleChange }
         />
-        <FaEye onClick={ showPass } />
+        <FaEye className={ style.eye } onClick={ showPass } />
       </label>
-      <label htmlFor="">
+      <label className={ style.label }>
         <input
           type="password"
           className={ style.input }
@@ -107,7 +112,7 @@ const Register = () => {
           aria-label="Type your password again"
           onChange={ handleChange }
         />
-        <FaEye onClick={ showPass } />
+        <FaEye className={ style.eye } onClick={ showPass } />
       </label>
       <button
         type="submit"

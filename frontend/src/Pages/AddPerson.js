@@ -1,6 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { MyContext } from '../context/Provides';
+import style from '../styles/AddPerson.module.css';
+import { FaHome } from 'react-icons/fa';
 
 const AddPerson = () => {
   const [state, setState] = useState({
@@ -67,13 +69,20 @@ const AddPerson = () => {
       history.push(`/dashboard`)
     }
   }
+
+  const goHome = () => {
+    history.push('/dashboard');
+  }
+  
   return (
     sent && !error ? (
       <p>{message}</p>
     ) : (
-      <form onSubmit={ handleSubmit }>
-        <legend>Add someone to the list!</legend>
+      <form className={ style.form } onSubmit={ handleSubmit }>
+        <FaHome className={ style.home } onClick={ goHome } />
+        <legend className={ style.legend }>Add someone to the list!</legend>
         <input
+          className={ style.input }
           type="text"
           name="firstName"
           value={ firstName }
@@ -82,6 +91,7 @@ const AddPerson = () => {
         />
         <input
           type="text"
+          className={ style.input }
           name="lastName"
           placeholder="Last name"
           value={ lastName }
@@ -89,21 +99,26 @@ const AddPerson = () => {
         />
         <input
           type="email"
+          className={ style.input }
           name="email"
           placeholder="E-mail"
           value={ email }
           onChange={ handleChange }
         />
-        <label htmlFor="birthday">Birthday</label>
-        <input
-          id="birthday"
-          type="date"
-          name="birthday"
-          value={ birthday }
-          onChange={ handleChange }
-        />
+        <label className={ style.label } htmlFor="birthday">Birthday
+        {' '}
+          <input
+            id="birthday"
+            className={ style.input }
+            type="date"
+            name="birthday"
+            value={ birthday }
+            onChange={ handleChange }
+          />
+        </label>
         <input
           type="text"
+          className={ style.input }
           placeholder="Phone"
           name="phone"
           value={ phone }
@@ -112,6 +127,7 @@ const AddPerson = () => {
         <input
           type="text"
           name="address"
+          className={ style.input }
           placeholder="Address"
           value={ address }
           onChange={ handleChange }
@@ -119,6 +135,7 @@ const AddPerson = () => {
         <input
           type="text"
           placeholder="City"
+          className={ style.input }
           name="city"
           value={ city }
           onChange={ handleChange }
@@ -126,12 +143,13 @@ const AddPerson = () => {
         <input
           type="text"
           placeholder="State"
+          className={ style.input }
           name="state"
           value={ st }
           onChange={ handleChange }
         />
-        {error && <p>{message}</p>}
-        <button type="submit" disabled={ disabled } onClick={ handleSubmit }>Add person</button>
+        {error && <p className={ style.message }>{message}</p>}
+        <button className={ style.button } type="submit" disabled={ disabled } onClick={ handleSubmit }>Add person</button>
       </form>
     )
   )
