@@ -16,7 +16,7 @@ peopleRoute.get(
 peopleRoute.get('/search', rescue(async (req, res) => {
   const { q } = req.query;
   const people = await readPeople();
-  const filteredPeople = people.filter((p) => p.name.includes(q));
+  const filteredPeople = people.filter((p) => p.first_name.includes(q));
   res.status(200).json(filteredPeople);
 }));
 
