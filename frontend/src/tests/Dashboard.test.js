@@ -35,7 +35,7 @@ describe('Dashboard page', () => {
     renderWithRouter(<App />);
     await goToDashboard();
     const btns = screen.getAllByRole('button');
-    expect(btns).toHaveLength(2);
+    expect(btns).toHaveLength(3);
     expect(btns[0]).toHaveTextContent('Click here!');
     expect(btns[1]).toHaveTextContent('Add a new person');
   });
