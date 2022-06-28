@@ -17,7 +17,7 @@ app.use(validateToken);
 app.use('/people', peopleRoute);
 
 app.all('*', (_req, res) => {
-  res.status(404).send('Page not found');
+  res.status(404).json({ message: 'Page not found' });
 })
 
 app.use((err, _req, res, _next) => {

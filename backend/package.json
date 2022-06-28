@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha tests/*.test.js",
+    "test": "mocha tests/**/*$NAME*.test.js",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json .",
     "dev": "nodemon index.js",
     "start": "node index.js"
