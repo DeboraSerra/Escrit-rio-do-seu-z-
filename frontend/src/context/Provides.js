@@ -28,8 +28,16 @@ const Provider = ({ children }) => {
 
   const setUser = async (user) => {
     try {
-      const url = `http://localhost:3005/user/login?email=${user.email}&password=${user.password}`;
-      const response = await fetch(url);
+      const url = `http://localhost:3005/user/login`;
+      const obj = {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(user),
+      }
+      const response = await fetch(url, obj);
       const data = await response.json();
       if (data.message) return data;
       setState({
