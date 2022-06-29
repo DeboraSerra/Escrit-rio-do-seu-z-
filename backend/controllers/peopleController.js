@@ -51,7 +51,7 @@ const updatePerson = async (req, res) => {
     state,
     address,
   }
-  await updatePerson({ ...newPerson, id });
+  await peopleService.updatePerson({ ...newPerson, id });
   res.status(202).end();
 }
 

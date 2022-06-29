@@ -9,8 +9,8 @@ const generateId = () => {
   return id;
 };
 
-const isValid = ({ firstName, lastName, birthday, email }) => {
-  if (!firstName || !lastName) throw new Error('Invalid name');
+const isValid = ({ first_name, last_name, birthday, email }) => {
+  if (!first_name || !last_name) throw new Error('Invalid name');
   if (!birthday) throw new Error('Invalid birthday');
   const isBirthValid = birthday.match(/^\d{4}-\d{2}-\d{2}/g);
   if (!isBirthValid) throw new Error('Invalid birthday');
