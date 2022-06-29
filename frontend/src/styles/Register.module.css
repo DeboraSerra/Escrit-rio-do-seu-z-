@@ -60,7 +60,7 @@
 }
 
 .message {
-  position: absolute;
+  position: fixed;
   background-color: var(--old-pink);
   color: var(--light-gray);
   top: 0;
