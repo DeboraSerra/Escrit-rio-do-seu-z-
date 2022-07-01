@@ -4,7 +4,7 @@ Esse projeto foi desenvolvido como projeto bônus no módulo de Backend no curso
 
 ## Preview do projeto
 
-![Preview do funcionamento da aplicação]()
+![Preview do funcionamento da aplicação](https://github.com/DeboraSerra/Escritorio-do-seu-ze/blob/main/escritorio-do-seu-ze.gif)
 
 ## Sumário
 - [Projeto Bônus 'Escritório do seu zé'](#projeto-bônus-escritório-do-seu-zé)
