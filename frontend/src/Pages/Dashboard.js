@@ -45,7 +45,9 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    setRenderPeople(query.toLowerCase());
+    if (query) {
+      setRenderPeople(query.toLowerCase());
+    }
   }, [query])
 
   return (

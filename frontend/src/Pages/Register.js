@@ -55,8 +55,14 @@ const Register = () => {
     history.push('/');
   }
 
-  const showPass = (e) => {
-    const input = e.target.previousSibling
+  const getElementOrClosest = (eye, target) =>
+    target.id === 'eye'
+      ? target
+      : target.closest(eye);
+
+  const showPass = ({ target }) => {
+    const clicked = getElementOrClosest('#eye', target);
+    const input = clicked.previousSibling
     if (input.type === 'password') {
       input.type = 'text';
     } else {
@@ -90,7 +96,7 @@ const Register = () => {
         aria-label="Type your email"
         onChange={ handleChange }
       />
-      <label className={ style.label }>
+      <section className={ style.label }>
         <input
           type="password"
           name="password"
@@ -100,9 +106,9 @@ const Register = () => {
           aria-label="Type your password"
           onChange={ handleChange }
         />
-        <FaEye className={ style.eye } onClick={ showPass } />
-      </label>
-      <label className={ style.label }>
+        <FaEye className={ style.eye } id="eye" onClick={ showPass } />
+      </section>
+      <section className={ style.label }>
         <input
           type="password"
           className={ style.input }
@@ -112,8 +118,8 @@ const Register = () => {
           aria-label="Type your password again"
           onChange={ handleChange }
         />
-        <FaEye className={ style.eye } onClick={ showPass } />
-      </label>
+        <FaEye className={ style.eye } id="eye" onClick={ showPass } />
+      </section>
       <button
         type="submit"
         className={ style.submitBtn }

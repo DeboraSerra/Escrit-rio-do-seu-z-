@@ -44,10 +44,18 @@
 .eye {
   position: absolute;
   cursor: pointer;
-  right: 10%;
-  top: 25%;
-  font-size: 1.5rem;
-  z-index: 2;
+  right: 8%;
+  top: 20%;
+  font-size: 1.8rem;
+  z-index: 10;
+}
+
+.eye:hover {
+  opacity: 0.8;
+}
+
+.eye:active {
+  color: var(--old-pink);
 }
 
 .submitBtn {

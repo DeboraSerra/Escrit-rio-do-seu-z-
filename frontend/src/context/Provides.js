@@ -115,6 +115,7 @@ const Provider = ({ children }) => {
       }
       const response = await fetch(url, obj);
       const data = await response.json();
+      if (data.message) return data;
       setState({
         ...state,
         person: data,
@@ -137,8 +138,10 @@ const Provider = ({ children }) => {
       body: JSON.stringify(data),
     }
     const response = await fetch(url, obj);
-    console.log(response);
-    const error = response.json();
+    let error = {};
+    if (response.status !== 202) {
+      error = await response.json();
+    }
     if (error.message) return error;
   }
 
@@ -167,7 +170,8 @@ const Provider = ({ children }) => {
         },
         body: JSON.stringify(person),
       }
-      await fetch(url, obj);
+      const response = await fetch(url, obj);
+      if (response && response.message) return response;
     } catch (err) {
       console.log(err.message);
       return err;

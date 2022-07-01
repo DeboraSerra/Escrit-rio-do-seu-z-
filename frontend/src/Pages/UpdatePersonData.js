@@ -37,7 +37,6 @@ const UpdatePage = () => {
     const isValidName = firstName && lastName;
     const isValidEmail = email && email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g);
     const isValidBirthday = birthday && birthday.match(/^\d{4}-\d{2}-\d{2}/g);
-    console.log({ isValidName, isValidEmail, isValidBirthday });
     if (isValidBirthday && isValidName && isValidEmail) {
       setState({
         ...state,
@@ -60,8 +59,14 @@ const UpdatePage = () => {
         address: address || p.address,
       }
       const response = await updatePerson(id, person);
-      console.log(response);
-      if (!response) {
+      console.log(response)
+      if (response) {
+        setState({
+          ...state,
+          error: true,
+          message: response.message,
+        })
+      } else {
         history.push(`/${id}`)
       }
     }
