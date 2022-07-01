@@ -8,7 +8,7 @@ const person = {
   "id": "be9cfac4-4d72-386a-8912-eed311837405",
   "firstName": "Harry",
   "lastName": "Potter",
-  "birthday": "31-07-1989",
+  "birthday": "1989-07-31",
   "city": "Little Whinging",
   "email": "harry.potter@hogwarts.com",
   "phone": "+3575676049522",

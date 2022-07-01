@@ -12,7 +12,7 @@ const generateId = () => {
 const isValid = ({ first_name, last_name, birthday, email }) => {
   if (!first_name || !last_name) throw new Error('Invalid name');
   if (!birthday) throw new Error('Invalid birthday');
-  const isBirthValid = birthday.match(/^\d{4}-\d{2}-\d{2}/g);
+  const isBirthValid = birthday.match(/^\d{2}-\d{2}-\d{4}/g);
   if (!isBirthValid) throw new Error('Invalid birthday');
   if (!email) throw new Error('Invalid email');
   const isEmailValid = email.match(/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g);
@@ -21,14 +21,14 @@ const isValid = ({ first_name, last_name, birthday, email }) => {
 }
 
 const readPeople = async () => {
-  const people = await peopleModel.readPeople();
-  return people;
+  const response = await peopleModel.readPeople();
+  return response;
 };
 
 const addPerson = async (person) => {
   isValid(person);
   const people = await peopleModel.readPeople();
-  people.push({ person, id: generateId() });
+  people.push({ ...person, id: generateId() });
   await peopleModel.addPeople(people);
   return true;
 };
@@ -36,16 +36,21 @@ const addPerson = async (person) => {
 const updatePerson = async (person) => {
   isValid(person);
   const people = await peopleModel.readPeople();
-  people.push(person);
-  await peopleModel.addPeople(people);
+  const newPeople = people.map((p) =>
+    p.id === person.id
+      ? { ...p, ...person }
+      : p
+  );
+  await peopleModel.addPeople(newPeople);
   return true;
 };
 
 const deletePerson = async (id) => {
   const people = await peopleModel.readPeople();
+  const person = people.find((p) => p.id === id);
   const newPeople = people.filter((p) => p.id !== id);
   if (people.length === newPeople.length) throw new Error('Person not found');
-  await peopleModel.deletePerson(newPeople);
+  await peopleModel.deletePerson(newPeople, person);
   return true;
 };
 
